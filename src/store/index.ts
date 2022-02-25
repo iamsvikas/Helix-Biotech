@@ -189,11 +189,7 @@ export default new Vuex.Store<State>({
       state.index = 0;
       console.log("clearData", state.productList);
     },
-    // incrementMutate(state) {
-    // if (this.quantity <= this.availableQuantity) {
-    // this.quantity = this.quantity + 1;
-    // }
-    // },
+
     addToCartMutate(state, payload) {
       const temp = state.shoppingCart.filter((item: any) => {
         return item.id === payload.id;
