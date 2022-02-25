@@ -204,37 +204,6 @@ export default new Vuex.Store<State>({
       } else {
         state.shoppingCart.push(payload);
       }
-      //kajol
-      // addToCart: (state, { product, quantity }) => {
-      //   const temp = state.addProductCart.filter((item: any) => {
-      //     return item.id === product.id;
-      //   });
-
-      //   if (temp.length == 0) {
-      //     state.totalAmount = 0;
-      //     state.totalTax = 0;
-      //     product.unit = quantity;
-      //     product.totalprice = parseFloat(product.price) * parseInt(product.unit);
-      //     state.addProductCart.push(product);
-      //     console.log(state.addProductCart,"state")
-      //     state.addProductCart.forEach((item: any) => {
-      //       state.totalTax = state.totalTax + parseFloat(item.tax);
-      //       state.totalAmount = state.totalAmount + parseFloat(item.totalprice);
-      //     });
-      //   } else {
-      //     state.totalAmount = 0;
-      //     state.totalTax = 0;
-      //     state.addProductCart.forEach((item: any) => {
-      //       if (item.id == product.id) {
-      //         item.unit = item.unit + quantity;
-      //         product.totalprice =
-      //           parseFloat(product.price) * parseInt(product.unit);
-      //       }
-      //       state.totalTax = state.totalTax + parseFloat(item.tax);
-      //       state.totalAmount = state.totalAmount + parseFloat(item.totalprice);
-      //     });
-      //   }
-      // },
     },
 
     reportSubmitMutate(state) {
