@@ -1,5 +1,6 @@
 import Vue from "vue";
 import Vuex from "vuex";
+import axios from "axios";
 
 Vue.use(Vuex);
 export interface State {
@@ -7,6 +8,7 @@ export interface State {
   colors: string[];
   productList: any[];
   shoppingCart: any[];
+  productListing: [];
   editingProduct: boolean;
   productData: string;
   sizeData: string;
@@ -32,6 +34,19 @@ export interface State {
   deleteSwitch: boolean;
   addSwitch: boolean;
   totalPrice: number;
+
+  firstName: string;
+  lastName: string;
+  gender: string;
+  mobile: number;
+  age: number;
+  city: string;
+  postalCode: number;
+  state: string;
+  country: string;
+  id: number;
+  customerListing: any[];
+  editingCustomer: boolean;
 }
 
 export default new Vuex.Store<State>({
@@ -50,6 +65,7 @@ export default new Vuex.Store<State>({
     quantity: 0,
     inventory: 0,
     count: 0,
+    productListing: [],
     productList: [
       {
         product: "Shirt",
@@ -112,6 +128,18 @@ export default new Vuex.Store<State>({
         inventory: 50,
       },
     ],
+    firstName: "",
+    lastName: "",
+    gender: "",
+    mobile: 0,
+    age: 0,
+    city: "",
+    postalCode: 0,
+    state: "",
+    country: "",
+    id: 0,
+    customerListing: [],
+    editingCustomer: false,
 
     //Permission Manager
     productsSwitch: true,
@@ -134,9 +162,17 @@ export default new Vuex.Store<State>({
     totalPrice: (state) => state.totalPrice,
   },
   mutations: {
-    addProductDetailsMutate(state, payload: any): void {
-      state.productList.push(payload);
-      console.log("data from productList:", state.productList, payload);
+    async addProductDetailsMutate(state): Promise<void> {
+      const productDetails = {
+        id: Date.now(),
+        product: state.productData,
+        size: state.sizeData,
+        color: state.colorData,
+        gender: state.genderData,
+        price: state.priceData,
+        tax: state.taxData,
+      };
+      await axios.post("http://localhost:3000/post", productDetails);
     },
     removeProductMutate(state, id) {
       state.productList = state.productList.filter((item) => item.id !== id);
@@ -150,36 +186,40 @@ export default new Vuex.Store<State>({
       state.taxData = payload.tax;
       state.index = payload.id;
     },
-    updateMutate(state) {
-      state.productList.map((item) => {
-        if (item.id === state.index) {
-          item.product = state.productData;
-          item.size = state.sizeData;
-          item.color = state.colorData;
-          item.gender = state.genderData;
-          item.price = state.priceData;
-          item.tax = state.taxData;
-        }
+    async updateMutate(state) {
+      const res = await axios.get("http://localhost:3000/post");
+
+      console.log(res.data);
+      const temp = res.data.filter((item: any) => {
+        return item.id === state.index;
       });
+      if (temp.length > 0) {
+        const data4 = {
+          ...temp[0],
+        };
+        data4.product = state.productData;
+        data4.size = state.sizeData;
+        data4.color = state.colorData;
+        data4.gender = state.genderData;
+        data4.price = state.priceData;
+        data4.tax = state.taxData;
+        axios.put("http://localhost:3000/post/" + temp[0].id, data4);
+      }
+      state.editingProduct = false;
     },
+
     addSwitchMutate(state, payload) {
       state.addSwitch = payload;
-      console.log(state.addSwitch);
     },
     deleteSwitchMuatate(state, payload) {
-      console.log(state.deleteSwitch, "payload:", payload);
       state.deleteSwitch = payload;
-      console.log(state.deleteSwitch);
     },
     editProductSwitchMutate(state, payload) {
-      console.log("@line101 store", state.editProductSwitch);
       state.editProductSwitch = payload;
-      console.log("@line103 store", state.editProductSwitch);
       state.editingProduct = !state.editingProduct;
     },
     clearDataMutate(state) {
       state.editingProduct = false;
-      console.log("clear data @line 73", state.editingProduct);
       state.productData = "";
       state.sizeData = "";
       state.colorData = "";
@@ -187,36 +227,46 @@ export default new Vuex.Store<State>({
       state.priceData = 0;
       state.taxData = 0;
       state.index = 0;
-      console.log("clearData", state.productList);
     },
 
-    addToCartMutate(state, payload) {
+    async addToCartMutate(state, payload) {
       const temp = state.shoppingCart.filter((item: any) => {
         return item.id === payload.id;
       });
 
+      // const cust = { ...item };
       if (temp.length > 0) {
-        temp[0].quantity = temp[0].quantity + payload.quantity;
+        const data = { ...temp[0] };
+        data.quantity = data.quantity + payload.quantity;
+        data.totalPrice = data.totalPrice + data.quantity * data.price;
+        axios.put("http://localhost:3000/shoppingCart/" + temp[0].id, data);
       } else {
-        state.shoppingCart.push(payload);
+        axios.post("http://localhost:3000/shoppingCart", payload);
       }
     },
-
-    reportSubmitMutate(state) {
-      console.log("shooping cart:", state.shoppingCart);
-      state.reportedData.push(state.shoppingCart);
-      state.shoppingCart = [];
-      console.log("reported data", state.reportedData);
+    async reportSubmitMutate(state) {
+      axios.post("http://localhost:3000/reportedData", state.shoppingCart);
+      const data = await axios.get("http://localhost:3000/shoppingCart");
+      const response = await axios.get("http://localhost:3000/reportedData");
+      state.reportedData = response.data;
       state.totalPrice = 0;
+      data.data.forEach(async (item: any) => {
+        await axios.delete("http://localhost:3000/shoppingCart/" + item.id);
+      });
     },
+
     counterMutate(state) {
       state.count = state.count + 1;
     },
-    deleteAllMutate(state) {
-      state.shoppingCart = [];
+
+    async deleteAllMutate(state) {
+      const res = await axios.get(`http://localhost:3000/shoppingCart`);
+      res.data.forEach(async (item: any) => {
+        await axios.delete(`http://localhost:3000/shoppingCart/` + item.id);
+      });
     },
+
     deleteItemMutate(state, payload) {
-      console.log("payload", payload);
       state.shoppingCart = state.shoppingCart.filter(
         (item) => item.id !== payload
       );
@@ -235,10 +285,76 @@ export default new Vuex.Store<State>({
       state.totalPrice = total;
       total = 0;
     },
+    productListingMutate(state, payload) {
+      state.productListing = payload;
+    },
+    displayReportedDataMutate(state, payload) {
+      state.reportedData = payload;
+    },
+    async addCustomerDetailsMutate(state): Promise<void> {
+      const customerDetails = {
+        id: Date.now(),
+        firstName: state.firstName,
+        lastName: state.lastName,
+        gender: state.gender,
+        age: state.age,
+        mobile: state.mobile,
+        city: state.city,
+        postalCode: state.postalCode,
+        state: state.state,
+        country: state.country,
+      };
+      await axios.post("http://localhost:3000/profiles", customerDetails);
+    },
+    customerListingMutate(state, payload) {
+      state.customerListing = payload;
+    },
+    removeCustomerMutate(state, payload) {
+      state.customerListing = state.customerListing.filter(
+        (item) => item.id !== payload
+      );
+    },
+    editCustomerMutate(state, payload) {
+      state.firstName = payload.firstName;
+      state.lastName = payload.lastName;
+      state.gender = payload.gender;
+      state.mobile = payload.mobile;
+      state.age = payload.age;
+      state.city = payload.city;
+      state.state = payload.state;
+      state.country = payload.country;
+      state.postalCode = payload.postalCode;
+      state.id = payload.id;
+    },
+    async updateCustomerMutate(state) {
+      const res = await axios.get("http://localhost:3000/profiles");
+
+      console.log(res.data);
+      const temp = res.data.filter((item: any) => {
+        return item.id === state.id;
+      });
+      if (temp.length > 0) {
+        const data4 = {
+          ...temp[0],
+        };
+        data4.firstName = state.firstName;
+        data4.lastName = state.lastName;
+        data4.gender = state.gender;
+        data4.mobile = state.mobile;
+        data4.age = state.age;
+        data4.city = state.city;
+        data4.state = state.state;
+        data4.country = state.country;
+        data4.postalCode = state.postalCode;
+        data4.id = state.id;
+        axios.put("http://localhost:3000/profiles/" + temp[0].id, data4);
+      }
+      state.editingCustomer = false;
+    },
   },
   actions: {
-    addProductDetailsAction({ commit }, payload) {
-      commit("addProductDetailsMutate", payload);
+    addProductDetailsAction({ commit }) {
+      commit("addProductDetailsMutate");
     },
     removeProductAction({ commit }, id) {
       commit("removeProductMutate", id);
@@ -281,6 +397,27 @@ export default new Vuex.Store<State>({
     },
     calculateTotalAction({ commit }) {
       commit("calculateTotalMutate");
+    },
+    productListingAction({ commit }, payload) {
+      commit("productListingMutate", payload);
+    },
+    displayReportedData({ commit }, payload) {
+      commit("displayReportedDataMutate", payload);
+    },
+    addCustomerDetailsAction({ commit }) {
+      commit("addCustomerDetailsMutate");
+    },
+    updateCustomerAction({ commit }) {
+      commit("updateCustomerMutate");
+    },
+    customerListingAction({ commit }, payload) {
+      commit("customerListingMutate", payload);
+    },
+    removeCustomerAction({ commit }, payload) {
+      commit("removeCustomerMutate", payload);
+    },
+    editCustomerAction({ commit }, payload) {
+      commit("editCustomerMutate", payload);
     },
   },
   modules: {},

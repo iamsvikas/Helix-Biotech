@@ -1,0 +1,99 @@
+{
+  "post": [
+    {
+      "id": 1646065725852,
+      "product": "pant12",
+      "size": "Large",
+      "color": "Red",
+      "gender": "Female",
+      "price": "890",
+      "tax": "16"
+    },
+    {
+      "id": 1646107266615,
+      "product": "Shirt",
+      "size": "Medium",
+      "color": "Green",
+      "gender": "Male",
+      "price": "1230",
+      "tax": "11"
+    },
+    {
+      "id": 1646107730149,
+      "product": "coat",
+      "size": "Large",
+      "color": "Green",
+      "gender": "Male",
+      "price": "1450",
+      "tax": "22"
+    },
+    {
+      "id": 1646107792039,
+      "product": "suit",
+      "size": "Extra Large",
+      "color": "Black",
+      "gender": "Male",
+      "price": "870",
+      "tax": "18"
+    },
+    {
+      "id": 1646152820550,
+      "product": "shirt",
+      "size": "Medium",
+      "color": "Green",
+      "gender": "Male",
+      "price": "1000",
+      "tax": "10"
+    },
+    {
+      "id": 1646164086302,
+      "product": "kurta",
+      "size": "Large",
+      "color": "Black",
+      "gender": "Male",
+      "price": "1000",
+      "tax": "16"
+    },
+    {
+      "id": 1646201712179,
+      "product": "blazer",
+      "size": "Large",
+      "color": "Blue",
+      "gender": "Male",
+      "price": "1999",
+      "tax": "18"
+    }
+  ],
+  "shoppingCart": [
+    {
+      "timeStamp": 1646392290914,
+      "id": 1646107730149,
+      "counter": 1,
+      "product": "coat",
+      "quantity": 4,
+      "price": "1450",
+      "totalPrice": 5800,
+      "color": "Green",
+      "gender": "Male",
+      "size": "Large",
+      "tax": "22",
+      "time": "16:41:30",
+      "date": "4-3-2022"
+    }
+  ],
+  "reportedData": [],
+  "profiles": [
+    {
+      "id": 1646382110327,
+      "firstName": "lklklkkl",
+      "lastName": "hhjhjhhjh",
+      "gender": "Male",
+      "age": "54",
+      "mobile": "098989989898",
+      "city": "yygyggy",
+      "postalCode": "07878787878",
+      "state": "rerererrere",
+      "country": "sdsdsdsds"
+    }
+  ]
+}
