@@ -64,24 +64,51 @@
       "tax": "18"
     }
   ],
-  "shoppingCart": [
-    {
-      "timeStamp": 1646392290914,
-      "id": 1646107730149,
-      "counter": 1,
-      "product": "coat",
-      "quantity": 4,
-      "price": "1450",
-      "totalPrice": 5800,
-      "color": "Green",
-      "gender": "Male",
-      "size": "Large",
-      "tax": "22",
-      "time": "16:41:30",
-      "date": "4-3-2022"
-    }
+  "shoppingCart": [],
+  "reportedData": [
+    [
+      {
+        "timeStamp": 1646671460766,
+        "id": 1646107266615,
+        "counter": 1,
+        "product": "Shirt",
+        "quantity": 2,
+        "price": "1230",
+        "totalPrice": 2460,
+        "color": "Green",
+        "gender": "Male",
+        "size": "Medium",
+        "tax": "11",
+        "time": "22:14:20",
+        "date": "7-3-2022"
+      },
+      {
+        "timeStamp": 1646671466849,
+        "id": 1646107730149,
+        "customerFirstName": "lklklkkl",
+        "customerLastName": "hhjhjhhjh",
+        "customerGender": "Male",
+        "customerAge": "54",
+        "customerMobile": "098989989898",
+        "customerCity": "yygyggy",
+        "customerPostalCode": "07878787878",
+        "customerState": "rerererrere",
+        "customerCountry": "sdsdsdsds",
+        "customerId": 1646382110327,
+        "counter": 2,
+        "product": "coat",
+        "quantity": 4,
+        "price": "1450",
+        "totalPrice": 5800,
+        "color": "Green",
+        "gender": "Male",
+        "size": "Large",
+        "tax": "22",
+        "time": "22:14:26",
+        "date": "7-3-2022"
+      }
+    ]
   ],
-  "reportedData": [],
   "profiles": [
     {
       "id": 1646382110327,

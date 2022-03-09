@@ -1,5 +1,9 @@
 <template>
-  <v-card class="card" elevation="20">
+  <v-card
+    class="card"
+    elevation="20"
+    :style="{ color: $store.state.posColor, fontSize: $store.state.posSize }"
+  >
     <!-- product and customerSelected are receiving from ProductCard as props-->
     <h1>{{ product.product }}</h1>
     <p>{{ product.inventory - quantity }} units available</p>
@@ -9,7 +13,11 @@
       <p>{{ quantity }}</p>
       <v-btn @click="increment">+</v-btn>
     </div>
-    <v-btn color="black" dark class="mt-4" @click="addToCart(product)"
+    <v-btn
+      dark
+      class="mt-4"
+      @click="addToCart(product)"
+      :style="{ backgroundColor: $store.state.posButtonColor }"
       >Add to Cart</v-btn
     >
   </v-card>

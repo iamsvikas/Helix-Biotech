@@ -2,42 +2,239 @@
   <div class="main">
     <h1>Sales Data</h1>
     <v-card width="90vw" class="card">
-      <v-simple-table fixed-header height="70vh">
+      <v-simple-table
+        fixed-header
+        height="70vh"
+        :style="{ borderColor: $store.state.reportBorderColor }"
+      >
         <template v-slot:default>
           <thead>
             <tr>
-              <th class="text-left">S. No.</th>
-              <th class="text-left">For Customer</th>
-              <th class="text-left">Product</th>
-              <th class="text-left">Gender</th>
-              <th class="text-left">Size</th>
-              <th class="text-left">Color</th>
-              <th class="text-left">Date</th>
-              <th class="text-left">Time</th>
-              <th class="text-left">Time Stamp</th>
-              <th class="text-left">Tax (in%)</th>
-              <th class="text-left">Quantity</th>
-              <th class="text-left">Price (inclusive taxes)</th>
-              <th class="text-left">Total Price (inclusive taxes)</th>
+              <th
+                class="text-left"
+                :style="{
+                  color: $store.state.reportColor,
+                  fontSize: $store.state.reportSize,
+                }"
+              >
+                S. No.
+              </th>
+              <th
+                class="text-left"
+                :style="{
+                  color: $store.state.reportColor,
+                  fontSize: $store.state.reportSize,
+                }"
+              >
+                For Customer
+              </th>
+              <th
+                class="text-left"
+                :style="{
+                  color: $store.state.reportColor,
+                  fontSize: $store.state.reportSize,
+                }"
+              >
+                Product
+              </th>
+              <th
+                class="text-left"
+                :style="{
+                  color: $store.state.reportColor,
+                  fontSize: $store.state.reportSize,
+                }"
+              >
+                Gender
+              </th>
+              <th
+                class="text-left"
+                :style="{
+                  color: $store.state.reportColor,
+                  fontSize: $store.state.reportSize,
+                }"
+              >
+                Size
+              </th>
+              <th
+                class="text-left"
+                :style="{
+                  color: $store.state.reportColor,
+                  fontSize: $store.state.reportSize,
+                }"
+              >
+                Color
+              </th>
+              <th
+                class="text-left"
+                :style="{
+                  color: $store.state.reportColor,
+                  fontSize: $store.state.reportSize,
+                }"
+              >
+                Date
+              </th>
+              <th
+                class="text-left"
+                :style="{
+                  color: $store.state.reportColor,
+                  fontSize: $store.state.reportSize,
+                }"
+              >
+                Time
+              </th>
+              <th
+                class="text-left"
+                :style="{
+                  color: $store.state.reportColor,
+                  fontSize: $store.state.reportSize,
+                }"
+              >
+                Time Stamp
+              </th>
+              <th
+                class="text-left"
+                :style="{
+                  color: $store.state.reportColor,
+                  fontSize: $store.state.reportSize,
+                }"
+              >
+                Tax (in%)
+              </th>
+              <th
+                class="text-left"
+                :style="{
+                  color: $store.state.reportColor,
+                  fontSize: $store.state.reportSize,
+                }"
+              >
+                Quantity
+              </th>
+              <th
+                class="text-left"
+                :style="{
+                  color: $store.state.reportColor,
+                  fontSize: $store.state.reportSize,
+                }"
+              >
+                Price (inclusive taxes)
+              </th>
+              <th
+                class="text-left"
+                :style="{
+                  color: $store.state.reportColor,
+                  fontSize: $store.state.reportSize,
+                }"
+              >
+                Total Price (inclusive taxes)
+              </th>
             </tr>
           </thead>
           <tbody v-for="tool in $store.state.reportedData" :key="tool.id">
             <tr v-for="item in tool" :key="item.cartId">
-              <td>{{ item.counter }}</td>
-              <td>
+              <td
+                :style="{
+                  color: $store.state.reportColor,
+                  fontSize: $store.state.reportSize,
+                }"
+              >
+                {{ item.counter }}
+              </td>
+              <td
+                :style="{
+                  color: $store.state.reportColor,
+                  fontSize: $store.state.reportSize,
+                }"
+              >
                 {{ item.customerFirstName + " " + item.customerLastName }}
               </td>
-              <td>{{ item.product }}</td>
-              <td>{{ item.gender }}</td>
-              <td>{{ item.size }}</td>
-              <td>{{ item.color }}</td>
-              <td>{{ item.date }}</td>
-              <td>{{ item.time }}</td>
-              <td>{{ item.timeStamp }}</td>
-              <td>{{ item.tax }}</td>
-              <td>{{ item.quantity }}</td>
-              <td>₹ {{ item.price }}</td>
-              <td>₹ {{ item.totalPrice }}</td>
+              <td
+                :style="{
+                  color: $store.state.reportColor,
+                  fontSize: $store.state.reportSize,
+                }"
+              >
+                {{ item.product }}
+              </td>
+              <td
+                :style="{
+                  color: $store.state.reportColor,
+                  fontSize: $store.state.reportSize,
+                }"
+              >
+                {{ item.gender }}
+              </td>
+              <td
+                :style="{
+                  color: $store.state.reportColor,
+                  fontSize: $store.state.reportSize,
+                }"
+              >
+                {{ item.size }}
+              </td>
+              <td
+                :style="{
+                  color: $store.state.reportColor,
+                  fontSize: $store.state.reportSize,
+                }"
+              >
+                {{ item.color }}
+              </td>
+              <td
+                :style="{
+                  color: $store.state.reportColor,
+                  fontSize: $store.state.reportSize,
+                }"
+              >
+                {{ item.date }}
+              </td>
+              <td
+                :style="{
+                  color: $store.state.reportColor,
+                  fontSize: $store.state.reportSize,
+                }"
+              >
+                {{ item.time }}
+              </td>
+              <td
+                :style="{
+                  color: $store.state.reportColor,
+                  fontSize: $store.state.reportSize,
+                }"
+              >
+                {{ item.timeStamp }}
+              </td>
+              <td
+                :style="{
+                  color: $store.state.reportColor,
+                  fontSize: $store.state.reportSize,
+                }"
+              >
+                {{ item.tax }}
+              </td>
+              <td
+                :style="{
+                  color: $store.state.reportColor,
+                  fontSize: $store.state.reportSize,
+                }"
+              >
+                {{ item.quantity }}
+              </td>
+              <td
+                :style="{
+                  color: $store.state.reportColor,
+                  fontSize: $store.state.reportSize,
+                }"
+              >
+                ₹ {{ item.price }}
+              </td>
+              <td
+                :style="{
+                  color: $store.state.reportColor,
+                  fontSize: $store.state.reportSize,
+                }"
+              >
+                ₹ {{ item.totalPrice }}
+              </td>
             </tr>
           </tbody>
         </template>
@@ -63,6 +260,7 @@ export default class ReportTools extends Vue {
 .card {
   overflow-y: scroll;
   overflow-x: scroll;
+  border: 2px solid black;
 }
 .main {
   display: flex;

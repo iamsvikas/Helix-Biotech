@@ -47,6 +47,18 @@ export interface State {
   id: number;
   customerListing: any[];
   editingCustomer: boolean;
+
+  productColor: string;
+  productSize: string;
+  productBorderColor: string;
+  productButtonColor: string;
+  posColor: string;
+  posSize: string;
+  posBorderColor: string;
+  posButtonColor: string;
+  reportColor: string;
+  reportSize: string;
+  reportBorderColor: string;
 }
 
 export default new Vuex.Store<State>({
@@ -141,7 +153,7 @@ export default new Vuex.Store<State>({
     customerListing: [],
     editingCustomer: false,
 
-    //Permission Manager
+    //=======================Permission Manager========================
     productsSwitch: true,
     editProductSwitch: true,
     productNameSwitch: true,
@@ -156,7 +168,21 @@ export default new Vuex.Store<State>({
 
     shoppingCart: [],
     reportedData: [],
+
+    //==============================Style Manager======================
+    productColor: "",
+    productSize: "",
+    productBorderColor: "",
+    productButtonColor: "",
+    posColor: "",
+    posSize: "",
+    posBorderColor: "",
+    posButtonColor: "",
+    reportColor: "",
+    reportSize: "",
+    reportBorderColor: "",
   },
+
   getters: {
     count: (state) => state.count,
     totalPrice: (state) => state.totalPrice,

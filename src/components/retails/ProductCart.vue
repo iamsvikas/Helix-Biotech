@@ -1,37 +1,139 @@
 <template>
   <div class="header">
-    <h1>Shopping Cart</h1>
+    <h1
+      :style="{
+        color: $store.state.posColor,
+        fontSize: $store.state.posSize,
+      }"
+    >
+      Shopping Cart
+    </h1>
     <v-btn dark @click="deleteAll">Delete All The Cart Items</v-btn>
     <hr />
     <v-simple-table fixed-header height="70vh">
       <template v-slot:default>
         <thead>
           <tr>
-            <th class="text-left">Product</th>
-            <th class="text-left">Quantity</th>
-            <th class="text-left">Price/Unit</th>
-            <th class="text-left">Total Price</th>
-            <th class="text-left">Delete</th>
+            <th
+              class="text-left"
+              :style="{
+                color: $store.state.posColor,
+                fontSize: $store.state.posSize,
+              }"
+            >
+              Product
+            </th>
+            <th
+              class="text-left"
+              :style="{
+                color: $store.state.posColor,
+                fontSize: $store.state.posSize,
+              }"
+            >
+              Quantity
+            </th>
+            <th
+              class="text-left"
+              :style="{
+                color: $store.state.posColor,
+                fontSize: $store.state.posSize,
+              }"
+            >
+              Price/Unit
+            </th>
+            <th
+              class="text-left"
+              :style="{
+                color: $store.state.posColor,
+                fontSize: $store.state.posSize,
+              }"
+            >
+              Total Price
+            </th>
+            <th
+              class="text-left"
+              :style="{
+                color: $store.state.posColor,
+                fontSize: $store.state.posSize,
+              }"
+            >
+              Delete
+            </th>
           </tr>
         </thead>
         <tbody>
           <tr v-for="item in $store.state.shoppingCart" :key="item.id">
-            <td>{{ item.product }}</td>
-            <td>{{ item.quantity }}</td>
-            <td>{{ item.price }}</td>
-            <td>{{ item.totalPrice }}</td>
-            <td class="mdi mdi-delete-alert" @click="deleteItem(item.id)"></td>
+            <td
+              :style="{
+                color: $store.state.posColor,
+                fontSize: $store.state.posSize,
+              }"
+            >
+              {{ item.product }}
+            </td>
+            <td
+              :style="{
+                color: $store.state.posColor,
+                fontSize: $store.state.posSize,
+              }"
+            >
+              {{ item.quantity }}
+            </td>
+            <td
+              :style="{
+                color: $store.state.posColor,
+                fontSize: $store.state.posSize,
+              }"
+            >
+              {{ item.price }}
+            </td>
+            <td
+              :style="{
+                color: $store.state.posColor,
+                fontSize: $store.state.posSize,
+              }"
+            >
+              {{ item.totalPrice }}
+            </td>
+            <td
+              class="mdi mdi-delete-alert"
+              @click="deleteItem(item.id)"
+              :style="{
+                color: $store.state.posColor,
+                fontSize: $store.state.posSize,
+              }"
+            ></td>
           </tr>
         </tbody>
         <tfoot>
-          <td>Total</td>
+          <td
+            :style="{
+              color: $store.state.posColor,
+              fontSize: $store.state.posSize,
+            }"
+          >
+            Total
+          </td>
           <td></td>
           <td></td>
-          <td>{{ totalPrice }}</td>
+          <td
+            :style="{
+              color: $store.state.posColor,
+              fontSize: $store.state.posSize,
+            }"
+          >
+            {{ totalPrice }}
+          </td>
         </tfoot>
       </template>
     </v-simple-table>
-    <v-btn dark class="submit" @click="reportSubmit">Submit</v-btn>
+    <v-btn
+      dark
+      class="submit"
+      @click="reportSubmit"
+      :style="{ backgroundColor: $store.state.posButtonColor }"
+      >Submit</v-btn
+    >
   </div>
 </template>
 

@@ -53,6 +53,11 @@ const routes: Array<RouteConfig> = [
     component: () =>
       import("../components/customerProfile/CustomerDetails.vue"),
   },
+  {
+    path: "/style-manager",
+    name: "StyleManager",
+    component: () => import("../components/StyleManager.vue"),
+  },
 ];
 
 const router = new VueRouter({

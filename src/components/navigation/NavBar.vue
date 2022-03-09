@@ -32,44 +32,27 @@
       <v-card
         class="card rounded-xl elevation-5"
         color="primary"
-        min-width="400"
+        min-width="450"
       >
         <h3 class="text">INVENTORY</h3>
         <div class="inventory">
           <span class="text">
             <div>Current Inventory</div>
             <div>Inventory Tools</div>
-            <div class="sub">
-              <router-link to="/" class="nav-link">
-                <div @click="menuToggler = !menuToggler">Products</div>
+            <div class="sub" v-for="item in this.inventoryTools" :key="item">
+              <router-link :to="item.route" class="nav-link">
+                <div @click="menuToggler = !menuToggler">{{ item.item }}</div>
               </router-link>
-              <div>Product Categories</div>
-              <div>Batch Types</div>
-              <div>Strain</div>
-              <div>Brands</div>
-              <div>Vendors & Laboratories</div>
-              <div>Inventory Rooms</div>
-              <div>Inventory Audits</div>
             </div>
           </span>
           <span class="text">
             <div>Pricing Tools</div>
-            <div class="sub">
-              <div>Price Points</div>
-              <div>Batch Level Pricing</div>
-              <div>Member Level Pricing</div>
-              <div>Tax Categories</div>
-              <div>Pricing Options</div>
+            <div class="sub" v-for="item in this.pricingTools" :key="item">
+              <div>{{ item }}</div>
             </div>
             <div>Batch Transfer</div>
-            <div class="sub">
-              <div>New Batches</div>
-              <div>Purchase order</div>
-              <div>Inbound Transfer</div>
-              <div>Quote</div>
-              <div>Outbound Transfer</div>
-              <div>Drivers</div>
-              <div>Vehicles</div>
+            <div class="sub" v-for="item in this.batchTransfer" :key="item">
+              <div>{{ item }}</div>
             </div>
           </span>
         </div>
@@ -101,11 +84,8 @@
         <div class="text">Management</div>
         <div class="text">Retail Sales History</div>
         <div class="text">Retail Options</div>
-        <div class="text sub">
-          <div>Discount Manager</div>
-          <div>Loyalty Programs</div>
-          <div>Retail Settings</div>
-          <div>Doctors</div>
+        <div class="text sub" v-for="item in this.retailOptions" :key="item">
+          <div>{{ item }}</div>
         </div>
       </v-card>
 
@@ -166,6 +146,18 @@
           </div>
         </router-link>
       </v-card>
+      <v-card
+        class="card rounded-xl elevation-5"
+        color="primary"
+        min-width="200"
+      >
+        <h3 class="text">Style Manager</h3>
+        <router-link to="/style-manager" class="nav-link">
+          <div class="text" @click="menuToggler = !menuToggler">
+            Style Manager
+          </div>
+        </router-link>
+      </v-card>
     </nav>
   </div>
 </template>
@@ -181,6 +173,38 @@ export default class extends Vue {
   menuBar() {
     this.menuToggler = !this.menuToggler;
   }
+  inventoryTools = [
+    { item: "Products", route: "/" },
+    { item: "Product Categories", route: "" },
+    { item: "Batch Types", route: "" },
+    { item: "Strain", route: "" },
+    { item: "Brands", route: "" },
+    { item: "Vendors & Laboratories", route: "" },
+    { item: "Inventory Rooms", route: "" },
+    { item: "Inventory Audits", route: "" },
+  ];
+  pricingTools = [
+    "Price Points",
+    "Batch Level Pricing",
+    "Member Level Pricing",
+    "Tax Categories",
+    "Pricing Options",
+  ];
+  batchTransfer = [
+    "New Batches",
+    "Purchase order",
+    "Inbound Transfer",
+    "Quote",
+    "Outbound Transfer",
+    "Drivers",
+    "Vehicles",
+  ];
+  retailOptions = [
+    "Discount Manager",
+    "Loyalty Programs",
+    "Retail Settings",
+    "Doctors",
+  ];
 }
 </script>
 
